@@ -1,0 +1,52 @@
+.loading-icon-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .loading-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 150px;
+    margin-left: -2rem;
+  }
+  
+  .loading-icon__circle {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: #2ba7dc;
+    margin-right: 8px;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  .loading-icon__circle--first {
+    animation-delay: 0.1s;
+    background-color: #ffc107;
+  
+  }
+  
+  .loading-icon__circle--second {
+    animation-delay: 0.2s;
+  }
+  
+  .loading-icon__circle--third {
+    animation-delay: 0.3s;
+    background-color: #ffc107;
+  }
+  .loading-icon__circle--fourth {
+    animation-delay: 0.3s;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(130%);
+    }
+  }
+  
