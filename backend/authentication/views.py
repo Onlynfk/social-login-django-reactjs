@@ -32,7 +32,7 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
             params = urlencode({'error': error})
             return redirect(f'{login_url}?{params}')
 
-        redirect_uri = f'{settings.BASE_FRONTEND_URL}/fetchuserprofile'
+        redirect_uri = f'{settings.BASE_FRONTEND_URL}/google'
         access_token = google_get_access_token(code=code, 
                                                redirect_uri=redirect_uri)
 

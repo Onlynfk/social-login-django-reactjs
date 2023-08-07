@@ -23,7 +23,7 @@ const Home = () => {
     const params = new URLSearchParams({
       response_type: "code",
       client_id: REACT_APP_GOOGLE_CLIENT_ID,
-      redirect_uri: `${REACT_APP_GOGGLE_REDIRECT_URL_ENDPOINT}/fetchuserprofile`,
+      redirect_uri: `${REACT_APP_GOGGLE_REDIRECT_URL_ENDPOINT}/google`,
       prompt: "select_account",
       access_type: "offline",
       scope,
