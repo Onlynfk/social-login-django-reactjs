@@ -1,4 +1,0 @@
-export BASE_BACKEND_URL = http://localhost:8000
-export BASE_BACKEND_URL = http://localhost:8000
-export GOOGLE_OAUTH2_CLIENT_ID = 31519363555-7amtjmh0ne8qplkj17lkqshrn1re57gk.apps.googleusercontent.com
-export GOOGLE_OAUTH2_CLIENT_SECRET= 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

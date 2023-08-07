@@ -52,3 +52,25 @@ def google_get_user_info(*, access_token:  str) -> Dict[str, Any]:
         raise ValidationError('Failed to obtain user info from Google.')
 
     return response.json()
+
+
+def get_first_matching_attr(obj, *attrs, default=None):
+    for attr in attrs:
+        if hasattr(obj, attr):
+            return getattr(obj, attr)
+
+    return default
+
+
+def get_error_message(exc) -> str:
+    if hasattr(exc, 'message_dict'):
+        return exc.message_dict
+    error_msg = get_first_matching_attr(exc, 'message', 'messages')
+
+    if isinstance(error_msg, list):
+        error_msg = ', '.join(error_msg)
+
+    if error_msg is None:
+        error_msg = str(exc)
+
+    return error_msg

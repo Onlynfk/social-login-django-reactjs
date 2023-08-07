@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .mixins import PublicApiMixin, ApiErrorsMixin
 from .utils import google_get_access_token, google_get_user_info, generate_tokens_for_user
 from .models import User
+from rest_framework import status
 from .serializers import UserSerializer
 
 
@@ -25,13 +26,13 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
         code = validated_data.get('code')
         error = validated_data.get('error')
 
-        login_url = f'{settings.BASE_FRONTEND_URL}/login'
+        login_url = f'{settings.BASE_FRONTEND_URL}'
     
         if error or not code:
             params = urlencode({'error': error})
             return redirect(f'{login_url}?{params}')
 
-        redirect_uri = f'{settings.BASE_FRONTEND_URL}/google/'
+        redirect_uri = f'{settings.BASE_FRONTEND_URL}/fetchuserprofile'
         access_token = google_get_access_token(code=code, 
                                                redirect_uri=redirect_uri)
 
@@ -45,14 +46,13 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
                 'access_token': str(access_token),
                 'refresh_token': str(refresh_token)
             }
-            return Response(response_data)
+            return Response(response_data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
-            username = user_data['email'].split('@')[0]
+            # username = user_data['email'].split('@')[0]
             first_name = user_data.get('given_name', '')
             last_name = user_data.get('family_name', '')
 
             user = User.objects.create(
-                username=username,
                 email=user_data['email'],
                 first_name=first_name,
                 last_name=last_name,
@@ -65,4 +65,4 @@ class GoogleLoginApi(PublicApiMixin, ApiErrorsMixin, APIView):
                 'access_token': str(access_token),
                 'refresh_token': str(refresh_token)
             }
-            return Response(response_data)
+            return Response(response_data, status=status.HTTP_200_OK)

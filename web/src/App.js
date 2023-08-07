@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Routes>
     <Route exact path="/" element={<Home />} />
-    <Route exact path="/google" element={<SocialAuth />} />
+    <Route exact path="/fetchuserprofile" element={<SocialAuth />} />
     </Routes>
   );
 };

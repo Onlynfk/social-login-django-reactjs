@@ -4,7 +4,7 @@ import queryString from "query-string";
 import axios from "axios";
 import "./index.css";
 
-const { BACKEND_API_URL } = process.env;
+const  BACKEND_API_URL = "http://127.0.0.1:8000"
 
 const SocialAuth = () => {
   let location = useLocation();
@@ -23,22 +23,22 @@ const SocialAuth = () => {
 
   const googleLoginHandler = (code) => {
     return axios
-      .get(`${BACKEND_API_URL}/api/v1/auth/login/google/${code}`)
+      .get(`${BACKEND_API_URL}/api/auth/google/${code}`)
       .then((res) => {
-        localStorage.setItem("token", res.data.access);
+        console.log("res", res)
+        localStorage.setItem("goggleFirstName", res.data.user.first_name);
+        navigate('/')
         return res.data;
       })
       .catch((err) => {
-        setError(err);
+        console.log("error", err)
         return err;
       });
   };
 
   const onGogglelogin = async () => {
     const response = await googleLoginHandler(location.search);
-    if (response.data.access) {
-      navigate("/");
-    }
+    console.log(response);
   }
 
   return (
